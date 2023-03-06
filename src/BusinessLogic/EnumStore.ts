@@ -1,0 +1,12 @@
+enum EnumStore {
+	USER = 'USER',
+	MENU = 'MENU',
+	EMPLOYEES = 'EMPLOYEES',
+	MENU_ELEMETS = 'MENU_ELEMETS',
+	TABLES = 'TABLES',
+	DISHES = 'DISHES',
+	RESTAURANTS = 'RESTAURANTS',
+	POPUP = 'POPUP',
+}
+
+export default EnumStore;

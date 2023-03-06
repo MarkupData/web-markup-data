@@ -1,0 +1,90 @@
+@import '../../../UIKit/Theme/Styles/_variables_global.scss';
+
+.employee-list__item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 6px;
+	border-radius: 12px;
+	width: 100%;
+	cursor: pointer;
+	transition: 0.3s;
+	padding: 6px 4px;
+
+	&:hover {
+		background-color: rgba(242, 141, 79, 0.2);
+	}
+}
+
+.employee-list__item__name_alfabet {
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+	margin-right: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+	color: $color-orange;
+	background-color: $color-gray-dirt;
+}
+
+.employee-list__item_container {
+	display: flex;
+	align-items: center;
+}
+
+.employee-list__item__wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 150px;
+}
+
+.employee-list__item__name {
+	color: $color-black;
+	font-size: 18px;
+	margin-bottom: 0px;
+}
+
+.employee-list__item__date {
+	color: $color-gray-dirt2;
+	font-size: 15px;
+}
+
+.employee-list__item__onlian_true {
+	padding: 5.8px 10.5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 10px;
+	background-color: $color-gray-dirt;
+	color: green;
+}
+
+.employee-list__item__block_onlian_true {
+	width: 6px;
+	height: 6px;
+	background-color: green;
+	border-radius: 100%;
+	margin-right: 9.5px;
+}
+
+.employee-list__item__block_onlian_false {
+	width: 6px;
+	height: 6px;
+	background-color: red;
+	border-radius: 100%;
+	margin-right: 9.5px;
+}
+
+.employee-list__item__button {
+	padding: 6px 10px;
+	font-size: 14px;
+	color: $color-gray-dirt2;
+	cursor: pointer;
+	transform: 0.3s;
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
