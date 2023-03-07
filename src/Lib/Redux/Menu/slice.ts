@@ -4,12 +4,7 @@ import {menuActions} from './Actions/menuActions';
 
 export enum EnumItemsMenu {
 	HOME = 'home',
-	RESTAURANT = 'restaurant',
-	MENU = 'menu',
-	EMPLOYEES = 'employee',
-	TABLE_QR = 'table_qr',
-	REPORTS = 'reports',
-	DISHES = 'dish',
+	PROJECTS = 'projects',
 }
 
 const initialState = {address: `${EnumItemsMenu.HOME}>`};

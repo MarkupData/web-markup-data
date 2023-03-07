@@ -1,4 +1,4 @@
-@import '../../UIKit/Theme/Styles/_variables_global.scss';
+@import '../../../UIKit/Theme/Styles/_variables_global.scss';
 
 .box-create__title {
 	font-size: 18px;
@@ -18,8 +18,6 @@
 		display: flex;
 		flex-direction: column;
 		width: 50%;
-
-		// max-height: '40%';
 
 		&.--end {
 			align-items: flex-end;
@@ -42,9 +40,6 @@
 		}
 
 		&.--scroll {
-			padding-right: 5px;
-			height: 500px;
-			overflow: hidden;
 			overflow-y: scroll;
 		}
 	}
@@ -58,7 +53,6 @@
 
 	.box-create__input {
 		width: 60%;
-		min-height: 36px;
 		height: 36px;
 		border-radius: 6px;
 		border: 1px solid $color-grey;

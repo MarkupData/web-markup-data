@@ -9,10 +9,12 @@ import {selectPopupGetChildren} from '../../Lib/Redux/Popup/Selectors/selectPopu
 import {popupActions} from '../../Lib/Redux/Popup/Actions/PopupActions';
 import ClouseIcon from '../../Assets/Icons/clouseIcon.svg';
 import {selectPopupGetIsView} from '../../Lib/Redux/Popup/Selectors/selectPopupGetIsView';
+import {selectPopupIsCanClouse} from '../../Lib/Redux/Popup/Selectors/selectPopupIsCanClouse';
 
 const Popup = () => {
 	const children = useStoreSelector(selectPopupGetChildren);
 	const isView = useStoreSelector(selectPopupGetIsView);
+	const isCanClouse = useStoreSelector(selectPopupIsCanClouse);
 	const dispatch = useDispatch();
 
 	const cancelHandler = useCallback(() => {
@@ -24,7 +26,7 @@ const Popup = () => {
 	}
 
 	return (
-		<div className="translucent-background" onClick={cancelHandler}>
+		<div className="translucent-background" onClick={() => !isCanClouse && cancelHandler}>
 			<div className="popup" onClick={(e) => e.stopPropagation()}>
 				<div className="popup__clouse" onClick={cancelHandler}>
 					<HandySvg className="popup__clouse__svg" src={ClouseIcon} />

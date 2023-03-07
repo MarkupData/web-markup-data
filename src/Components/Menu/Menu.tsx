@@ -23,41 +23,11 @@ const menuList = [
 		iconActive: HomeActiveIcon,
 	},
 	{
-		id: EnumItemsMenu.RESTAURANT,
-		label: 'Restaurants',
+		id: EnumItemsMenu.PROJECTS,
+		label: 'Projects',
 		icon: HomeIcon,
 		iconActive: HomeActiveIcon,
 	},
-	{
-		id: EnumItemsMenu.EMPLOYEES,
-		label: 'Employees',
-		icon: EmployeesIcon,
-		iconActive: EmployeesActiveIcon,
-	},
-	{
-		id: EnumItemsMenu.MENU,
-		label: 'Menus',
-		icon: HomeIcon,
-		iconActive: HomeActiveIcon,
-	},
-	{
-		id: EnumItemsMenu.DISHES,
-		label: 'Dishes',
-		icon: HomeIcon,
-		iconActive: HomeActiveIcon,
-	},
-	// {
-	// 	id: EnumItemsMenu.TABLE_QR,
-	// 	label: 'Table & QR-Code',
-	// 	icon: HomeIcon,
-	// 	iconActive: HomeActiveIcon,
-	// },
-	// {
-	// 	id: EnumItemsMenu.REPORTS,
-	// 	label: 'Reports',
-	// 	icon: ReportsIcon,
-	// 	iconActive: ReportsActiveIcon,
-	// },
 ];
 
 const Menu = (props: THomeContainerProps) => {

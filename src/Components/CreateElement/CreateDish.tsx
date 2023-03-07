@@ -4,11 +4,8 @@ import _ from 'lodash';
 import './CreateElement.scss';
 import '../../UIKit/Theme/Styles/_fonts_global.scss';
 import SelectMultiple from '../../UIKit/Elemets/SelectMultiple/SelectMultiple';
-import {selectMenuElementsState} from '../../Lib/Redux/MenuElements/Selectors/selectMenuElementsState';
 import {useStoreSelector} from '../../Lib/Hooks/useStoreSelector';
 import {useDispatch} from 'react-redux';
-import {menuElementsActions} from '../../Lib/Redux/MenuElements/Actions/MenuElemetsActions';
-import {dishesActions} from '../../Lib/Redux/Dishes/Actions/DishesActions';
 
 export type IDishProps = {
 	id?: number;
@@ -25,7 +22,7 @@ type ICreateDishProps = {
 };
 
 const CreateDish = (props: ICreateDishProps) => {
-	const menusData = useStoreSelector(selectMenuElementsState);
+	// const menusData = useStoreSelector(selectMenuElementsState);
 	const dispatch = useDispatch();
 	const {data, cancalHandler, isVertical} = props;
 	const [name, setName] = useState<string>(data?.name || '');
@@ -34,19 +31,17 @@ const CreateDish = (props: ICreateDishProps) => {
 
 	const select_menu_ids = [...menu_ids];
 
-	// console.log('menu_ids-', menu_ids);
-
 	const saveButtonHandler = () => {
-		dispatch(
-			_.isUndefined(data?.id)
-				? dishesActions.create({name, price, menu_ids})
-				: dishesActions.update({...data, price, name, menu_ids}),
-		);
+		// dispatch(
+		// 	_.isUndefined(data?.id)
+		// 		? dishesActions.create({name, price, menu_ids})
+		// 		: dishesActions.update({...data, price, name, menu_ids}),
+		// );
 		props.okHandler && props.okHandler({...props.data, name, menu_ids});
 	};
 
 	useEffect(() => {
-		dispatch(menuElementsActions.getList());
+		// dispatch(menuElementsActions.getList());
 	}, []);
 
 	const title = _.isUndefined(data?.id) ? 'Create employee' : null;
@@ -73,14 +68,14 @@ const CreateDish = (props: ICreateDishProps) => {
 						onChange={(value) => setPrice(value.target.value)}
 					/>
 					<div className="box-create__input__label CustomFontRegular">Select menus:</div>
-					<SelectMultiple
+					{/* <SelectMultiple
 						data_list={menusData.data}
 						list_value={'id'}
 						list_label={'name'}
 						onChange={setMenus_ids}
 						curent_value={select_menu_ids}
 						isLoading={menusData.isLoading}
-					/>
+					/> */}
 				</div>
 				<div className={`box-create__wrapper --line ${isVertical && '--end'}`}>
 					<div

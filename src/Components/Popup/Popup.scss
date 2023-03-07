@@ -12,8 +12,9 @@
 
 .popup {
 	position: absolute;
-	width: 40%;
+	width: 80%;
 	min-width: 500px;
+	// max-height: 80%;
 	background-color: $color-white;
 	border-radius: 10px;
 	padding-top: 10px;
@@ -34,7 +35,7 @@
 		}
 	}
 
-	.popup__content {
+	&__content {
 		width: 100%;
 		padding: 20px;
 	}

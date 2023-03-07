@@ -1,8 +1,5 @@
 import {fork} from 'typed-redux-saga';
-import dishSagaWatcher from './Dishes/dishSagaWatcher';
-import employeeSagaWatcher from './Employees/employeeSagaWatcher';
-import menuElementSagaWatcher from './MenuElements/menuElementSagaWatcher';
-import restaurantSagaWatcher from './Restaurants/restaurantSagaWatcher';
+import projectsSagaWatcher from './Projects/projectsSagaWatcher';
 import userSagaWatcher from './User/userSagaWatcher';
 
 /**
@@ -11,8 +8,5 @@ import userSagaWatcher from './User/userSagaWatcher';
  */
 export default function* RootSaga() {
 	yield* fork(userSagaWatcher);
-	yield* fork(restaurantSagaWatcher);
-	yield* fork(dishSagaWatcher);
-	yield* fork(menuElementSagaWatcher);
-	yield* fork(employeeSagaWatcher);
+	yield* fork(projectsSagaWatcher);
 }

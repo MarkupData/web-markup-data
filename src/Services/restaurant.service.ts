@@ -1,5 +1,5 @@
 import {ApiUrl} from '../const';
-import {Restaurant} from '../Lib/Redux/Restaurants/slice';
+import {ProjectInfo} from '../Lib/Redux/Projects/slice';
 import {fetchWrapper} from '../Utils/fetch-wrapper';
 
 export const restaurantService = {
@@ -18,11 +18,11 @@ async function getById(id: number) {
 	return fetchWrapper.get(`${ApiUrl}/restaurants-admin/restaurants/${id}/`);
 }
 
-async function create(restaurant: Restaurant) {
+async function create(restaurant: ProjectInfo) {
 	return fetchWrapper.post(`${ApiUrl}/restaurants-admin/restaurants/`, restaurant);
 }
 
-async function update(restaurant: Restaurant) {
+async function update(restaurant: ProjectInfo) {
 	return fetchWrapper.put(`${ApiUrl}/restaurants-admin/restaurants/${restaurant.id}/`, restaurant);
 }
 
