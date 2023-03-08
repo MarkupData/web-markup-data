@@ -3,7 +3,7 @@ import EnumStore from '../../../BusinessLogic/EnumStore';
 import {projectsActions} from './Actions/ProjectsActions';
 
 const initialState = {
-	data: [{id: 4, name: 'test', task_class: 'test', labels: []}],
+	data: [],
 	isLoading: false,
 	isErorr: false,
 	current: {
@@ -27,6 +27,9 @@ export const projectsSlice = createSlice<ProjectsType, SliceCaseReducers<Project
 			state.isLoading = false;
 		},
 		[projectsActions.getById.type]: (state) => {
+			state.current.isLoading = true;
+		},
+		[projectsActions.handler.type]: (state) => {
 			state.current.isLoading = true;
 		},
 		[projectsActions.entryCurrent.type]: (state, action) => {
@@ -53,16 +56,31 @@ export type TAttributeProps = {
 };
 
 export type TLabelProps = {
+	id?: number;
+	project?: number;
 	name: string;
-	type: string[];
+	selection_tools: string[];
 	color?: string;
 	attributes?: TAttributeProps[];
+};
+
+export type TTaskClassesProps = {
+	id: number;
+	name: string;
+	selection_tools: string[];
+};
+
+export type TCreateProject = {
+	id?: number;
+	name: string;
+	task_class?: number;
+	labels?: TLabelProps[];
 };
 
 export type Project = {
 	id?: number;
 	name: string;
-	task_class?: string | number;
+	task_class?: TTaskClassesProps;
 	labels?: TLabelProps[];
 };
 
@@ -70,12 +88,6 @@ type TProjectCurrentProps = {
 	isLoading: boolean;
 	isErorr: boolean;
 	data: Project | undefined;
-};
-
-export type TTaskClassesProps = {
-	id: number;
-	name: string;
-	tool_selections: string[];
 };
 
 export interface ProjectsType {

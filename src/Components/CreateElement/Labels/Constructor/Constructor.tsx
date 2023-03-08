@@ -10,40 +10,44 @@ import '../../../../UIKit/Theme/Styles/_fonts_global.scss';
 import ColorPicker from '../../../ColorPicker/ColorPicker';
 import Attribute from './Attribute/Attribute';
 import {TAttributeProps, TLabelProps, TYPE_INPUT} from '../../../../Lib/Redux/Projects/slice';
+import {useDispatch} from 'react-redux';
+import {projectsActions} from '../../../../Lib/Redux/Projects/Actions/ProjectsActions';
 
 type TConstructorProps = {
 	data: TLabelProps[];
 	setData: (data: TLabelProps[]) => void;
 	labelTypes: string[];
+	project_id: number | undefined;
 };
 
 const Constructor = (props: TConstructorProps) => {
+	const dispatch = useDispatch();
 	const [isColorPicker, setIsColorPicker] = useState(false);
 	const [indexEdit, setIndexEdit] = useState<number | undefined>(undefined);
 	const [editLabel, setEditLabel] = useState<TLabelProps | undefined>(undefined);
 	const [isError, setIsError] = useState(false);
-	const {data, setData, labelTypes} = props;
+	const {data, setData, labelTypes, project_id} = props;
 
 	const openColorPicker = () => setIsColorPicker(true);
 	const cancelColorPicker = () => setIsColorPicker(false);
 	const saveColor = useCallback(
 		(color: string) => {
 			cancelColorPicker();
-			setEditLabel({name: '', type: [], ...editLabel, color: color});
+			setEditLabel({name: '', selection_tools: [], ...editLabel, color: color});
 		},
 		[cancelColorPicker, setEditLabel, editLabel],
 	);
 
 	const nameChange = useCallback(
 		(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-			setEditLabel({type: [], ...editLabel, name: event.target.value});
+			setEditLabel({selection_tools: [], ...editLabel, name: event.target.value});
 		},
 		[setEditLabel, editLabel],
 	);
 
 	const typeChange = useCallback(
 		(data: string[]) => {
-			setEditLabel({name: '', ...editLabel, type: data});
+			setEditLabel({name: '', ...editLabel, selection_tools: data});
 		},
 		[setEditLabel, editLabel],
 	);
@@ -63,8 +67,8 @@ const Constructor = (props: TConstructorProps) => {
 
 	const addEditItem = useCallback(() => {
 		setIndexEdit(undefined);
-		setEditLabel({name: '', type: ['any'], color: '#000'});
-	}, [setIndexEdit, setEditLabel]);
+		setEditLabel({project: project_id, name: '', selection_tools: [labelTypes[0]], color: '#000'});
+	}, [setIndexEdit, setEditLabel, labelTypes, project_id]);
 
 	const addAttribute = useCallback(() => {
 		const attributes = editLabel?.attributes || [];
@@ -75,14 +79,14 @@ const Constructor = (props: TConstructorProps) => {
 			values: [],
 			default_value: '',
 		});
-		setEditLabel({name: '', type: [], ...editLabel, attributes});
+		setEditLabel({name: '', selection_tools: [], ...editLabel, attributes});
 	}, [setEditLabel, editLabel]);
 
 	const deleteAttribute = useCallback(
 		(index: number) => {
 			const attributes = editLabel?.attributes || [];
 			attributes.splice(index, 1);
-			setEditLabel({name: '', type: [], ...editLabel, attributes});
+			setEditLabel({name: '', selection_tools: [], ...editLabel, attributes});
 		},
 		[setEditLabel, editLabel],
 	);
@@ -91,7 +95,7 @@ const Constructor = (props: TConstructorProps) => {
 		(index: number, data: TAttributeProps) => {
 			const attributes = editLabel?.attributes || [];
 			attributes[index] = data;
-			setEditLabel({name: '', type: [], ...editLabel, attributes});
+			setEditLabel({name: '', selection_tools: [], ...editLabel, attributes});
 		},
 		[setEditLabel, editLabel],
 	);
@@ -104,13 +108,17 @@ const Constructor = (props: TConstructorProps) => {
 			const newData = [...data];
 			newData.splice(index, 1);
 			setData([...newData]);
+			if (!_.isUndefined(project_id) && !_.isUndefined(data[index].id)) {
+				// TODO: delete label to project
+				dispatch(projectsActions.deleteLabel({id: data[index].id, project_id}));
+			}
 		},
 		[setData, data, cancelEditItem, indexEdit],
 	);
 
 	const saveEditItem = useCallback(() => {
 		const newData = [...data];
-		if (editLabel?.name === '' || editLabel?.type.length === 0) {
+		if (editLabel?.name === '' || editLabel?.selection_tools.length === 0) {
 			setIsError(true);
 			return;
 		}
@@ -125,8 +133,16 @@ const Constructor = (props: TConstructorProps) => {
 		setIsError(false);
 		if (_.isUndefined(indexEdit)) {
 			newData.push(editLabel as TLabelProps);
+			if (!_.isUndefined(project_id)) {
+				// TODO: add new label to project
+				dispatch(projectsActions.createLabel({data: editLabel as TLabelProps, project_id}));
+			}
 		} else {
 			newData[indexEdit] = editLabel as TLabelProps;
+			if (!_.isUndefined(project_id)) {
+				// TODO: put label to project
+				dispatch(projectsActions.updateLabel({data: editLabel as TLabelProps, project_id}));
+			}
 		}
 		setData([...newData]);
 		cancelEditItem();
@@ -177,15 +193,14 @@ const Constructor = (props: TConstructorProps) => {
 						<FormControl sx={{m: 1, width: '30%'}}>
 							<Autocomplete
 								size="small"
-								value={editLabel.type}
+								value={editLabel.selection_tools}
 								onChange={(e, v) => typeChange([...v])}
 								multiple
 								limitTags={2}
 								id="multiple-limit-tags"
 								options={labelTypes}
 								getOptionLabel={(option) => option}
-								defaultValue={[labelTypes[0]]}
-								renderInput={(params) => <TextField {...params} placeholder="Types" />}
+								renderInput={(params) => <TextField {...params} placeholder="Types*" />}
 							/>
 						</FormControl>
 						<FormControl sx={{m: 1, width: '10%'}}>

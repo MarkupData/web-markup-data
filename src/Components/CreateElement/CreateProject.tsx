@@ -8,7 +8,12 @@ import '../../UIKit/Theme/Styles/_fonts_global.scss';
 import {useDispatch} from 'react-redux';
 import {projectsActions} from '../../Lib/Redux/Projects/Actions/ProjectsActions';
 import Labels from './Labels/Labels';
-import {Project, TLabelProps, TTaskClassesProps} from '../../Lib/Redux/Projects/slice';
+import {
+	Project,
+	TCreateProject,
+	TLabelProps,
+	TTaskClassesProps,
+} from '../../Lib/Redux/Projects/slice';
 import {useStoreSelector} from '../../Lib/Hooks/useStoreSelector';
 import {selectProjectCurrent} from '../../Lib/Redux/Projects/Selectors/selectProjectCurrent';
 import Spinner from '../Spinner/Spinner';
@@ -19,18 +24,16 @@ type ICreateProjectProps = {
 	data: Project | undefined;
 	cancalHandler: () => void;
 	isVertical: boolean | undefined;
-	okHandler?: (data: Project) => void;
+	okHandler?: (data: TCreateProject) => void;
 };
-
-const labelTypes = ['any', 'boolean', 'number', 'string', 'array'];
 
 const CreateProject = (props: ICreateProjectProps) => {
 	const {data, cancalHandler, isVertical} = props;
 	const {isLoading, data: getData} = useStoreSelector(selectProjectCurrent);
 	const taskClasses = useStoreSelector(selectTaskClasses);
 	const [name, setName] = useState<string>(data?.name || '');
-	const [task_class, set_task_class] = useState<string | number | undefined>(
-		data?.task_class || undefined,
+	const [task_class, set_task_class] = useState<number | undefined>(
+		data?.task_class?.id || undefined,
 	);
 	const [labels, setLabels] = useState<TLabelProps[]>([]);
 	const dispatch = useDispatch();
@@ -47,17 +50,23 @@ const CreateProject = (props: ICreateProjectProps) => {
 		if (!_.isUndefined(getData) && !_.isUndefined(props.id)) {
 			setName(getData.name || '');
 			setLabels(getData.labels || []);
-			set_task_class(getData.task_class);
+			set_task_class(getData.task_class?.id || undefined);
 		}
 	}, [getData, props.id]);
 
 	const title = _.isUndefined(data?.id) ? 'Create new Project' : null;
 
 	const saveButtonHandler = () => {
+		const newData = {
+			...data,
+			id: data?.id || getData?.id,
+			name,
+			task_class,
+		};
 		dispatch(
 			_.isUndefined(data?.id)
 				? projectsActions.create({name, labels, task_class})
-				: projectsActions.update({...data, id: data?.id || getData?.id, name, labels, task_class}),
+				: projectsActions.update(newData),
 		);
 		props.okHandler && props.okHandler({...props.data, name, labels, task_class});
 	};
@@ -81,15 +90,10 @@ const CreateProject = (props: ICreateProjectProps) => {
 							onChange={(value) => setName(value.target.value)}
 						/>
 						<div className="box-create__input__label CustomFontRegular">Task Class</div>
-						{/* {taskClasses?.map((item) => (
-							<div key={item.id} className="box-create__input__label CustomFontRegular">
-								{item.name}
-							</div>
-						))} */}
 						<Select
 							size="small"
 							value={task_class}
-							onChange={(event) => set_task_class(event.target.value)}
+							onChange={(event) => set_task_class(Number(event.target.value))}
 							displayEmpty
 						>
 							{taskClasses?.map((item: TTaskClassesProps) => (
@@ -103,8 +107,9 @@ const CreateProject = (props: ICreateProjectProps) => {
 							labels={labels}
 							setLabels={setLabels}
 							labelTypes={
-								taskClasses?.find((item) => item.id === task_class)?.tool_selections || labelTypes
+								taskClasses?.find((item) => item.id === task_class)?.selection_tools || []
 							}
+							project_id={data?.id}
 						/>
 					</div>
 				)}

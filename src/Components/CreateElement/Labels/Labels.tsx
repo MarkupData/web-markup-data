@@ -22,9 +22,10 @@ type TLabelsProps = {
 	labels: TLabelProps[];
 	setLabels: (labels: TLabelProps[]) => void;
 	labelTypes: string[];
+	project_id: number | undefined;
 };
 
-const Labels = ({labels, setLabels, labelTypes}: TLabelsProps) => {
+const Labels = ({labels, setLabels, labelTypes, project_id}: TLabelsProps) => {
 	const [menu, setMenu] = useState<LabelsMenu>(LabelsMenu.CONSTRUCTOR);
 
 	const rowHandler = () => setMenu(LabelsMenu.ROW);
@@ -35,11 +36,18 @@ const Labels = ({labels, setLabels, labelTypes}: TLabelsProps) => {
 			case LabelsMenu.ROW:
 				return <RowJson data={labels} setData={setLabels} />;
 			case LabelsMenu.CONSTRUCTOR:
-				return <Constructor data={labels} setData={setLabels} labelTypes={labelTypes} />;
+				return (
+					<Constructor
+						data={labels}
+						setData={setLabels}
+						labelTypes={labelTypes}
+						project_id={project_id}
+					/>
+				);
 			default:
 				return null;
 		}
-	}, [menu, labels, setLabels]);
+	}, [menu, labels, setLabels, labelTypes]);
 
 	return (
 		<div className="labels">

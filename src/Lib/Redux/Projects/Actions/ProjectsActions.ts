@@ -22,6 +22,9 @@ enum EnumActions {
 	CLEAR_CURRENT = 'CLEAR_CURRENT',
 	ENTRY_TASK_CLASSES = 'ENTRY_TASK_CLASSES',
 	GET_TASK_CLASSES = 'GET_TASK_CLASSES',
+	CREATE_LABEL = 'CREATE_LABEL',
+	UPDATE_LABEL = 'UPDATE_LABEL',
+	DELETE_LABEL = 'DELETE_LABEL',
 }
 
 class ProjectsActions extends ClientOnlyActions<EnumStore.PROJECTS> {
@@ -52,5 +55,11 @@ class ProjectsActions extends ClientOnlyActions<EnumStore.PROJECTS> {
 	entryTaskClasses = this.createAction(EnumActions.ENTRY_TASK_CLASSES);
 
 	getTaskClasses = this.createAction(EnumActions.GET_TASK_CLASSES);
+
+	createLabel = this.createAction(EnumActions.CREATE_LABEL);
+
+	updateLabel = this.createAction(EnumActions.UPDATE_LABEL);
+
+	deleteLabel = this.createAction(EnumActions.DELETE_LABEL);
 }
 export const projectsActions = new ProjectsActions();

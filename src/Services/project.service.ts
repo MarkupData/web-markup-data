@@ -1,5 +1,5 @@
 import {ApiUrl} from '../const';
-import {Project} from '../Lib/Redux/Projects/slice';
+import {TCreateProject} from '../Lib/Redux/Projects/slice';
 import {fetchWrapper} from '../Utils/fetch-wrapper';
 
 export const projectService = {
@@ -19,11 +19,11 @@ async function getById(id: number) {
 	return fetchWrapper.get(`${ApiUrl}/projects/${id}/`);
 }
 
-async function create(project: Project) {
+async function create(project: TCreateProject) {
 	return fetchWrapper.post(`${ApiUrl}/projects/`, project);
 }
 
-async function update(project: Project) {
+async function update(project: TCreateProject) {
 	return fetchWrapper.put(`${ApiUrl}/projects/${project.id}/`, project);
 }
 
@@ -32,5 +32,5 @@ async function _delete(id: number) {
 }
 
 async function getListTaskClasses() {
-	return fetchWrapper.get(`${ApiUrl}/task_classes/`);
+	return fetchWrapper.get(`${ApiUrl}/projects/task-classes/`);
 }

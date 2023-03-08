@@ -17,7 +17,6 @@ import {Project} from '../../../Lib/Redux/Projects/slice';
 
 const ITEM_HEIGHT = 48;
 enum OPTIONS {
-	EDIT = 'Edit',
 	DELETE = 'Delete',
 	EXPORT = 'Export',
 }
@@ -35,21 +34,6 @@ const ProjectList = () => {
 	const itemClick = (event: React.MouseEvent<HTMLElement>, option: string, data: Project) => {
 		handleClick(event, null);
 		switch (option) {
-			case OPTIONS.EDIT:
-				dispatch(
-					popupActions.open({
-						children: (
-							<CreateProject
-								id={data.id}
-								data={data}
-								cancalHandler={() => dispatch(popupActions.close())}
-								isVertical={true}
-							/>
-						),
-						isCanClouse: true,
-					}),
-				);
-				break;
 			case OPTIONS.DELETE:
 				dispatch(projectsActions.delete(data.id));
 				break;
@@ -82,8 +66,6 @@ const ProjectList = () => {
 	const itemClickHandler = useCallback((item: Project) => {
 		dispatch(projectsActions.handler(item.id));
 	}, []);
-
-	console.log('restaurantsData-', restaurantsData);
 
 	return (
 		<List
@@ -140,7 +122,7 @@ const ProjectList = () => {
 						</div>
 					</div>
 					<div className="projects-list__item__header__status -is-online CustomFontRegular">
-						{item.task_class}
+						{item.task_class?.name}
 					</div>
 				</div>
 			))}
