@@ -57,6 +57,10 @@ const CreateProject = (props: ICreateProjectProps) => {
 	const title = _.isUndefined(data?.id) ? 'Create new Project' : null;
 
 	const saveButtonHandler = () => {
+		if (_.isEmpty(name) || name.length < 1) {
+			// TODO: view faild message
+			return;
+		}
 		const newData = {
 			...data,
 			id: data?.id || getData?.id,

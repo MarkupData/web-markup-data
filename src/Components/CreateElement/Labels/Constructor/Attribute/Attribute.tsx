@@ -97,7 +97,7 @@ const Attribute = (props: TAttributeComponentProps) => {
 					onChange={(e: React.SyntheticEvent, status: boolean) =>
 						setAttribute({...attribute, mutable: status})
 					}
-					control={<Checkbox value={attribute.mutable} />}
+					control={<Checkbox checked={attribute.mutable} />}
 					label="Mutable"
 				/>
 			</FormControl>

@@ -62,16 +62,12 @@ const Project = () => {
 						<div className="project-edit__input__label CustomFontRegular">Task Class</div>
 						<Select
 							size="small"
-							value={task_class ?? null}
+							value={task_class ?? ''}
 							onChange={(event) => set_task_class(Number(event.target.value))}
 							displayEmpty
 						>
 							{taskClasses?.map((item: TTaskClassesProps) => (
-								<MenuItem
-									key={item.id}
-									value={item.id}
-									sx={{backgroundColor: item.id === task_class ? 'red' : '#000'}}
-								>
+								<MenuItem key={item.id} value={item.id}>
 									{item.name}
 								</MenuItem>
 							))}
