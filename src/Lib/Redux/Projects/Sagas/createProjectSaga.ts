@@ -1,16 +1,16 @@
 import {PayloadAction} from '@reduxjs/toolkit';
 import {put} from 'typed-redux-saga';
-import {restaurantService} from '../../../../Services/restaurant.service';
+import {projectService} from '../../../../Services/project.service';
 import ServiceFactory from '../../../../Services/ServiceFactory';
 import {popupActions} from '../../Popup/Actions/PopupActions';
 import {projectsActions} from '../Actions/ProjectsActions';
-import {ProjectInfo} from '../slice';
+import {Project} from '../slice';
 
-function* createProjectSaga(action: PayloadAction<ProjectInfo>) {
+function* createProjectSaga(action: PayloadAction<Project>) {
 	try {
-		const response: Response = yield restaurantService.create(action.payload);
+		const response: Response = yield projectService.create(action.payload);
 		if (response.status === 200 || response.status === 201) {
-			const data: ProjectInfo = yield response.json();
+			const data: Project = yield response.json();
 			yield* put(popupActions.close());
 			yield* put(projectsActions.handler(data.id));
 		}

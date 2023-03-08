@@ -1,8 +1,6 @@
 import React, {ChangeEvent, useCallback, useState} from 'react';
 import _ from 'lodash';
 import FormControl from '@mui/material/FormControl';
-import Select, {SelectChangeEvent} from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 import {TextField, Button, Autocomplete, IconButton, Alert} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -10,7 +8,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import './Constructor.scss';
 import '../../../../UIKit/Theme/Styles/_fonts_global.scss';
 import ColorPicker from '../../../ColorPicker/ColorPicker';
-import InputTags from '../../../InputTags/InputTags';
 import Attribute from './Attribute/Attribute';
 import {TAttributeProps, TLabelProps} from '../../../../Lib/Redux/Projects/slice';
 

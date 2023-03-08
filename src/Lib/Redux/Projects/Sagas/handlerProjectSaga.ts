@@ -1,12 +1,12 @@
 import {PayloadAction} from '@reduxjs/toolkit';
 import {put} from 'typed-redux-saga';
 import {EnumNestedAddresses} from '../../../../Containers/Panel/type';
-import {restaurantService} from '../../../../Services/restaurant.service';
+import {projectService} from '../../../../Services/project.service';
 import ServiceFactory from '../../../../Services/ServiceFactory';
 import {menuActions} from '../../Menu/Actions/menuActions';
 import {EnumItemsMenu} from '../../Menu/slice';
 import {projectsActions} from '../Actions/ProjectsActions';
-import {ProjectInfo} from '../slice';
+import {Project} from '../slice';
 
 function* handlerProjectSaga(action: PayloadAction<number>) {
 	try {
@@ -17,8 +17,8 @@ function* handlerProjectSaga(action: PayloadAction<number>) {
 			}),
 		);
 
-		const response_current: Response = yield restaurantService.getById(action.payload);
-		const data_current: ProjectInfo[] = yield response_current.json();
+		const response_current: Response = yield projectService.getById(action.payload);
+		const data_current: Project[] = yield response_current.json();
 		yield* put(projectsActions.entryCurrent(data_current));
 	} catch (error) {
 		ServiceFactory.error(error, {saga: 'handlerProjectSaga'});

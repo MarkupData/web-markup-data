@@ -64,4 +64,4 @@ export default connect(selectUserState, mapDispatchToProps)(AuthContainer);
 export type TUserContainerProps = TUserContainerConnectedDispatches &
 	TContentUpsellContainerStateProps;
 
-type TUserContainerConnectedDispatches = ReturnType<typeof mapDispatchToProps>;
+export type TUserContainerConnectedDispatches = ReturnType<typeof mapDispatchToProps>;

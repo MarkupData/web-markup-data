@@ -1,10 +1,10 @@
-import {ActionCreatorWithPayload} from '@reduxjs/toolkit';
 import {User} from '../../Lib/Redux/User/slice';
 import {authService} from '../../Services/auth.service';
+import {TUserContainerConnectedDispatches} from './AuthContainer';
 
 interface Props {
 	user: User;
-	login: ActionCreatorWithPayload<User, string>;
+	login: TUserContainerConnectedDispatches['loginUser'];
 }
 
 interface IToken {
@@ -19,7 +19,7 @@ const useAuthSection = ({user, login}: Props) => {
 			const response: Response = await authService.getToken(username, password);
 			if (response.status === 200) {
 				await updateUser(response);
-				return null;
+				return '';
 			} else {
 				return 'Не верный логин или пароль';
 			}

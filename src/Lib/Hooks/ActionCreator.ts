@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {createAction} from '@reduxjs/toolkit';
 import EnumActionRole from './EnumActionRole';
 
@@ -26,14 +27,18 @@ abstract class VActions<S extends string, R extends EnumActionRole> {
 		};
 	}
 
-	private defaultPrepareActionCreator<P = any, M = any, E = any>(): PrepareActionWithMetaAndError<P, M, E> {
+	private defaultPrepareActionCreator<P = any, M = any, E = any>(): PrepareActionWithMetaAndError<
+		P,
+		M,
+		E
+	> {
 		return (payload: P, meta?: M, error?: E) => ({payload, meta, error});
 	}
 
-	protected createAction<PA extends PrepareActionWithMetaAndError<any, any, any>, T extends string = never>(
-		type: T,
-		prepareAction?: PA,
-	) {
+	protected createAction<
+		PA extends PrepareActionWithMetaAndError<any, any, any>,
+		T extends string = never,
+	>(type: T, prepareAction?: PA) {
 		const prepareActionDefault = this.defaultPrepareActionCreator<
 			ReturnType<PA>['payload'],
 			ReturnType<PA>['meta'],
@@ -64,7 +69,10 @@ export abstract class ClientToServerActions<S extends string = string> extends V
 	readonly role = EnumActionRole.CLIENT_TO_SERVER;
 }
 
-export abstract class ClientOnlyActions<S extends string = string> extends VActions<S, EnumActionRole.CLIENT_ONLY> {
+export abstract class ClientOnlyActions<S extends string = string> extends VActions<
+	S,
+	EnumActionRole.CLIENT_ONLY
+> {
 	readonly role = EnumActionRole.CLIENT_ONLY;
 
 	protected createAction<PA extends PrepareActionWithMetaAndError<any>, T extends string = never>(
@@ -75,7 +83,9 @@ export abstract class ClientOnlyActions<S extends string = string> extends VActi
 	}
 }
 
-type ExtraPrepareAction<PA extends PrepareActionWithMetaAndError<any, any, any>, OT> = (...args: Parameters<PA>) => {
+type ExtraPrepareAction<PA extends PrepareActionWithMetaAndError<any, any, any>, OT> = (
+	...args: Parameters<PA>
+) => {
 	payload: ReturnType<PA>['payload'];
 	meta: ReturnType<PA>['meta'] & IPrepareActionCreatorOptions<OT>;
 	error: boolean | ReturnType<PA>['error'];

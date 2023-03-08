@@ -24,25 +24,6 @@ export const projectsSlice = createSlice<ProjectsType, SliceCaseReducers<Project
 	},
 });
 
-export type ProjectItem = {
-	id: number;
-	name: string;
-	address: string;
-};
-
-export type ProjectInfo = {
-	id: number;
-	name: string;
-	address: string;
-};
-
-export interface ProjectsType {
-	data: ProjectItem[];
-	isLoading: boolean;
-	isErorr: boolean;
-	current: ProjectInfo | undefined;
-}
-
 export type TAttributeProps = {
 	name: string;
 	input_type: string;
@@ -57,5 +38,19 @@ export type TLabelProps = {
 	color?: string;
 	attributes?: TAttributeProps[];
 };
+
+export type Project = {
+	id?: number;
+	name: string;
+	task_class: string;
+	labels?: TLabelProps[];
+};
+
+export interface ProjectsType {
+	data: Project[];
+	isLoading: boolean;
+	isErorr: boolean;
+	current: Project | undefined;
+}
 
 export const projectsReducer = projectsSlice.reducer;

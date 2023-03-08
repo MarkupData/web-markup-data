@@ -1,5 +1,4 @@
 import React, {useCallback, useState} from 'react';
-import _ from 'lodash';
 
 import './Labels.scss';
 import '../../../UIKit/Theme/Styles/_fonts_global.scss';

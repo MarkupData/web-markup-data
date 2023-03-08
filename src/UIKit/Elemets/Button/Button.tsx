@@ -1,7 +1,4 @@
 import React from 'react';
-import {HandySvg} from 'handy-svg';
-
-import iconSrc from '../../../Assets/Icons/IconNext.svg';
 
 import './Button.scss';
 import '../../Theme/Styles/_fonts_global.scss';

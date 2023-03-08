@@ -1,12 +1,8 @@
 import {HandySvg} from 'handy-svg';
-import React, {useCallback, useState} from 'react';
-import {useDispatch} from 'react-redux';
+import React, {useCallback} from 'react';
 
 import HomeIcon from '../../Assets/Icons/homeIcon.svg';
-import ReportsIcon from '../../Assets/Icons/reportsIcon.svg';
-import EmployeesIcon from '../../Assets/Icons/employeesIcon.svg';
 import HomeActiveIcon from '../../Assets/Icons/homeActiveIcon.svg';
-import EmployeesActiveIcon from '../../Assets/Icons/employeesActiveIcon.svg';
 import ReportsActiveIcon from '../../Assets/Icons/reportsActiveIcon.svg';
 
 import './Menu.scss';
@@ -25,7 +21,7 @@ const menuList = [
 	{
 		id: EnumItemsMenu.PROJECTS,
 		label: 'Projects',
-		icon: HomeIcon,
+		icon: ReportsActiveIcon,
 		iconActive: HomeActiveIcon,
 	},
 ];

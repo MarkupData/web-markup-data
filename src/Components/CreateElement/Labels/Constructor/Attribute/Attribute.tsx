@@ -1,5 +1,4 @@
-import React, {ChangeEvent, useCallback, useState} from 'react';
-import _ from 'lodash';
+import React, {ChangeEvent, useCallback} from 'react';
 import FormControl from '@mui/material/FormControl';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
@@ -21,7 +20,7 @@ enum TYPE_INPUT {
 
 type TAttributeComponentProps = {
 	attribute: TAttributeProps;
-	setAttribute: (attribute: any) => void;
+	setAttribute: (attribute: TAttributeProps) => void;
 	deleteAttribute: () => void;
 };
 

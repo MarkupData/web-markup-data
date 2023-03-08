@@ -7,7 +7,6 @@ import {useStoreSelector} from '../Lib/Hooks/useStoreSelector';
 import {selectIsLoggedIn} from '../Lib/Redux/User/Selectors/selectIsLoggedIn';
 import PrivateRoute from './PrivateRoute';
 import useNavigateProps from '../Utils/Navigation/useNavigateProps';
-import {selectUserState} from '../Lib/Redux/User/Selectors/selectUserState';
 import Home from './VirtualPage/Home';
 import MarkupData from './VirtualPage/MarkupData';
 
@@ -19,11 +18,6 @@ const RouterContainer: FC = () => {
 	const homeNavigateProps = useNavigateProps(EnumRoutes.HOME);
 
 	const isLoggedIn = useStoreSelector(selectIsLoggedIn);
-	const user = useStoreSelector(selectUserState);
-
-	// if (!isLoggedIn) {
-	// 	return <Spinner />;
-	// }
 
 	return (
 		<Suspense fallback={<Spinner />}>

@@ -4,12 +4,7 @@ import {userClientOnlyActions} from './Actions/userClientOnlyActions';
 import {getWithExpiry, initialUser} from './initialData';
 
 const init = getWithExpiry(EnumStore.USER);
-// const initialState = init !== null ? init : initialUser;
-const initialState = {
-	email: 'dsfg',
-	token: 'dfg',
-	refreshToken: 'sfd',
-};
+const initialState = init !== null ? init : initialUser;
 
 export const userSlice = createSlice<User, SliceCaseReducers<User>, EnumStore>({
 	name: EnumStore.USER,

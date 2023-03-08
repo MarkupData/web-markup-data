@@ -5,13 +5,11 @@ import Toggle from '../../../UIKit/Elemets/Toggle/Toggle';
 import '../Auth.scss';
 import '../../../UIKit/Theme/Styles/_fonts_global.scss';
 
-import {TUserContainerProps} from '../../../Containers/Auth/AuthContainer';
-
 interface Props {
 	loginUserClient: (username: string, password: string) => Promise<string>;
 }
 
-const Login: FC<TUserContainerProps> = ({loginUserClient}: Props) => {
+const Login: FC<Props> = ({loginUserClient}) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [savePassword, setSavePassword] = useState(false);

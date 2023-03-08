@@ -11,9 +11,7 @@ const ProjectContainer = (props: THomeContainerProps) => {
 		case EnumNestedAddresses.LIST:
 			return <ProjectList />;
 		case EnumNestedAddresses.ELEMENT:
-			return <Project {...props} />;
-		case EnumNestedAddresses.CREATE:
-			return <Project {...props} />;
+			return <Project />;
 		default:
 			return null;
 	}

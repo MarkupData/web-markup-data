@@ -1,5 +1,4 @@
 import React, {useCallback, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
 
 import './ProjectList.scss';
 import '../../../UIKit/Theme/Styles/_fonts_global.scss';
@@ -10,13 +9,13 @@ import {useDispatch} from 'react-redux';
 import {popupActions} from '../../../Lib/Redux/Popup/Actions/PopupActions';
 import CreateProject from '../../CreateElement/CreateProject';
 import {projectsActions} from '../../../Lib/Redux/Projects/Actions/ProjectsActions';
-import {ProjectItem} from '../../../Lib/Redux/Projects/slice';
+import {Project} from '../../../Lib/Redux/Projects/slice';
 
 const ProjectList = () => {
 	const restaurantsData = useStoreSelector(selectProjectsList);
 	const dispatch = useDispatch();
 
-	// TODO: navigation set url
+	// TODO: navigation set url (import {useNavigate} from 'react-router-dom';)
 	// const navigate = useNavigate();
 	// navigate(EnumRoutes.MARKUP_DATA);
 
@@ -39,7 +38,7 @@ const ProjectList = () => {
 		);
 	}, [popupActions.close]);
 
-	const itemClickHandler = useCallback((item: ProjectItem) => {
+	const itemClickHandler = useCallback((item: Project) => {
 		dispatch(projectsActions.handler(item.id));
 	}, []);
 
@@ -50,7 +49,7 @@ const ProjectList = () => {
 			labelAddButton={'Add project'}
 			addButtonHandler={addButtonHandler}
 		>
-			{restaurantsData?.map((item: ProjectItem) => (
+			{restaurantsData?.map((item: Project) => (
 				<div onClick={() => itemClickHandler(item)} key={item.id} className="restaurant-list__item">
 					<div className="restaurant-list__item__header">
 						<div className="restaurant-list__item__header__name CustomFontMedium">{item.name}</div>
@@ -59,7 +58,7 @@ const ProjectList = () => {
 							Online
 						</div>
 					</div>
-					<div className="restaurant-list__item__address CustomFontRegular">{item.address}</div>
+					{/* <div className="restaurant-list__item__address CustomFontRegular">{item.address}</div> */}
 				</div>
 			))}
 		</List>

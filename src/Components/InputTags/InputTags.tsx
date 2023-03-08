@@ -1,6 +1,6 @@
 import {Autocomplete, TextField} from '@mui/material';
 import {Box} from '@mui/system';
-import React, {useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
 type TInputTags = {
 	tags: string[];
@@ -10,11 +10,11 @@ type TInputTags = {
 export default function InputTags({tags, SetTags}: TInputTags) {
 	const [val, SetVal] = useState<string>('');
 
-	const handleOnDrag = (e: any) => {
+	const handleOnDrag = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		SetVal(e.target.value);
 	};
 
-	const handleOnKey = (e: any) => {
+	const handleOnKey = (e: KeyboardEvent<HTMLDivElement>) => {
 		if (val.length > 0 && e.key === 'Enter') {
 			SetTags([...tags, val]);
 			SetVal('');
