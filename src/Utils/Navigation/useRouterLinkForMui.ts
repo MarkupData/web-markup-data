@@ -5,7 +5,12 @@ import EnumRoutes from '../../Routes/EnumRoutes';
 import getRouterLinkForMui from './getRouterLinkForMui';
 import PropertyHandler from '../../Lib/Redux/PropertyHandler';
 
-const useRouterLinkForMui = (route: EnumRoutes, params?: Params, onClick?: PropertyHandler, search?: Search) => {
+const useRouterLinkForMui = (
+	route: EnumRoutes,
+	params?: Params,
+	onClick?: PropertyHandler,
+	search?: Search,
+) => {
 	const navigateProps = useNavigateProps(route, params, search);
 
 	return useMemo(

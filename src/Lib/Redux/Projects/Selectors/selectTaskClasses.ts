@@ -1,7 +1,7 @@
 import {createSelector} from '../../../../Utils/Redux';
 import {selectProjectsState} from './selectProjectsState';
 
-export const selectProjectCurrent = createSelector(
+export const selectTaskClasses = createSelector(
 	[selectProjectsState],
-	(projectsState) => projectsState.current,
+	(projectsState) => projectsState.task_classes,
 );

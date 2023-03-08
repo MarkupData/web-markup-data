@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react';
 
 import Select, {StylesConfig} from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -50,7 +51,6 @@ export default function SelectMultiple(props: Props) {
 	return (
 		<Select
 			onChange={updateDataChange}
-			// closeMenuOnSelect={false}
 			components={animatedComponents}
 			value={curent_value_list}
 			isMulti

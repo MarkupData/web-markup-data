@@ -1,4 +1,4 @@
-import React, {FC, lazy, Suspense} from 'react';
+import React, {FC, lazy, Suspense, useEffect} from 'react';
 import {Navigate, Route, Routes, useLocation} from 'react-router';
 
 import EnumRoutes from './EnumRoutes';
@@ -9,15 +9,21 @@ import PrivateRoute from './PrivateRoute';
 import useNavigateProps from '../Utils/Navigation/useNavigateProps';
 import Home from './VirtualPage/Home';
 import MarkupData from './VirtualPage/MarkupData';
+import {useDispatch} from 'react-redux';
+import {projectsActions} from '../Lib/Redux/Projects/Actions/ProjectsActions';
 
 const NotFound = lazy(() => import('./VirtualPage/NotFound'));
 
 const RouterContainer: FC = () => {
+	const dispatch = useDispatch();
 	const location = useLocation();
 	const state = location.state;
 	const homeNavigateProps = useNavigateProps(EnumRoutes.HOME);
-
 	const isLoggedIn = useStoreSelector(selectIsLoggedIn);
+
+	useEffect(() => {
+		dispatch(projectsActions.getTaskClasses());
+	}, []);
 
 	return (
 		<Suspense fallback={<Spinner />}>

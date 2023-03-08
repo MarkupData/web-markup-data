@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 type PropertyHandler<
 	A0 = any,
 	A1 = any,

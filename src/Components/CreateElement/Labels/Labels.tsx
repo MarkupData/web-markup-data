@@ -21,9 +21,10 @@ enum LabelsMenu {
 type TLabelsProps = {
 	labels: TLabelProps[];
 	setLabels: (labels: TLabelProps[]) => void;
+	labelTypes: string[];
 };
 
-const Labels = ({labels, setLabels}: TLabelsProps) => {
+const Labels = ({labels, setLabels, labelTypes}: TLabelsProps) => {
 	const [menu, setMenu] = useState<LabelsMenu>(LabelsMenu.CONSTRUCTOR);
 
 	const rowHandler = () => setMenu(LabelsMenu.ROW);
@@ -34,7 +35,7 @@ const Labels = ({labels, setLabels}: TLabelsProps) => {
 			case LabelsMenu.ROW:
 				return <RowJson data={labels} setData={setLabels} />;
 			case LabelsMenu.CONSTRUCTOR:
-				return <Constructor data={labels} setData={setLabels} />;
+				return <Constructor data={labels} setData={setLabels} labelTypes={labelTypes} />;
 			default:
 				return null;
 		}

@@ -51,7 +51,6 @@ async function _delete(url: string) {
 }
 
 async function getAccessUsingRefresh(refresh: string) {
-	// const auth = await authHeader();
 	const url = `${ApiUrl}/auth/token/refresh/`;
 	const requestOptions: RequestInit = {
 		method: 'POST',
@@ -63,8 +62,6 @@ async function getAccessUsingRefresh(refresh: string) {
 
 async function authHeader() {
 	const token: string | null = await getVerifiedKeys();
-	// const user = state[EnumStore.USER];
-	// const isLoggedIn = user && user.token;
 	if (token) {
 		return {Authorization: `Bearer ${token}`};
 	} else {

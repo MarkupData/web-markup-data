@@ -10,9 +10,8 @@ function* createProjectSaga(action: PayloadAction<Project>) {
 	try {
 		const response: Response = yield projectService.create(action.payload);
 		if (response.status === 200 || response.status === 201) {
-			const data: Project = yield response.json();
+			// const data: Project = yield response.json();
 			yield* put(popupActions.close());
-			yield* put(projectsActions.handler(data.id));
 		}
 		yield* put(projectsActions.getList());
 	} catch (error) {

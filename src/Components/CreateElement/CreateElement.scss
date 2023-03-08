@@ -19,7 +19,12 @@
 		flex-direction: column;
 		width: 50%;
 
-		// max-height: '40%';
+		&.--spiner {
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			height: 300px;
+		}
 
 		&.--end {
 			align-items: flex-end;
@@ -46,6 +51,18 @@
 			height: 500px;
 			overflow: hidden;
 			overflow-y: scroll;
+		}
+
+		&.--center {
+			align-items: center;
+		}
+
+		&.--absolut {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			left: 0;
+			top: 0;
 		}
 	}
 

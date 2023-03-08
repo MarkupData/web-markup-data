@@ -8,24 +8,29 @@ export const projectService = {
 	create,
 	update,
 	delete: _delete,
+	getListTaskClasses,
 };
 
 async function getList() {
-	return fetchWrapper.get(`${ApiUrl}/restaurants-admin/restaurants/`);
+	return fetchWrapper.get(`${ApiUrl}/projects/`);
 }
 
 async function getById(id: number) {
-	return fetchWrapper.get(`${ApiUrl}/restaurants-admin/restaurants/${id}/`);
+	return fetchWrapper.get(`${ApiUrl}/projects/${id}/`);
 }
 
 async function create(project: Project) {
-	return fetchWrapper.post(`${ApiUrl}/restaurants-admin/restaurants/`, project);
+	return fetchWrapper.post(`${ApiUrl}/projects/`, project);
 }
 
 async function update(project: Project) {
-	return fetchWrapper.put(`${ApiUrl}/restaurants-admin/restaurants/${project.id}/`, project);
+	return fetchWrapper.put(`${ApiUrl}/projects/${project.id}/`, project);
 }
 
 async function _delete(id: number) {
-	return fetchWrapper.delete(`${ApiUrl}/restaurants-admin/restaurants/${id}/`);
+	return fetchWrapper.delete(`${ApiUrl}/projects/${id}/`);
+}
+
+async function getListTaskClasses() {
+	return fetchWrapper.get(`${ApiUrl}/task_classes/`);
 }

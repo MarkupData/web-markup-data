@@ -18,6 +18,10 @@ enum EnumActions {
 	UPDATE = 'UPDATE',
 	DELETE = 'DELETE',
 	MENU_UPDATE_ITEM = 'MENU_UPDATE_ITEM',
+	GET_BY_ID = 'GET_BY_ID',
+	CLEAR_CURRENT = 'CLEAR_CURRENT',
+	ENTRY_TASK_CLASSES = 'ENTRY_TASK_CLASSES',
+	GET_TASK_CLASSES = 'GET_TASK_CLASSES',
 }
 
 class ProjectsActions extends ClientOnlyActions<EnumStore.PROJECTS> {
@@ -40,5 +44,13 @@ class ProjectsActions extends ClientOnlyActions<EnumStore.PROJECTS> {
 	entryList = this.createAction(EnumActions.ENTRY_LIST);
 
 	entryCurrent = this.createAction(EnumActions.ENTRY_CURRENT);
+
+	getById = this.createAction(EnumActions.GET_BY_ID);
+
+	clearCurrent = this.createAction(EnumActions.CLEAR_CURRENT);
+
+	entryTaskClasses = this.createAction(EnumActions.ENTRY_TASK_CLASSES);
+
+	getTaskClasses = this.createAction(EnumActions.GET_TASK_CLASSES);
 }
 export const projectsActions = new ProjectsActions();

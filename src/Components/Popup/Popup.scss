@@ -1,6 +1,7 @@
 @import '../../UIKit/Theme/Styles/_variables_global.scss';
 
 .translucent-background {
+	z-index: 100;
 	position: absolute;
 	width: 100vw;
 	height: 100vh;
@@ -14,7 +15,8 @@
 	position: absolute;
 	width: 80%;
 	min-width: 500px;
-	// max-height: 80%;
+	max-height: 90%;
+	min-height: 200px;
 	background-color: $color-white;
 	border-radius: 10px;
 	padding-top: 10px;

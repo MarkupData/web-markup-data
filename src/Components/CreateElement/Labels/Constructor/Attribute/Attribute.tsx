@@ -8,15 +8,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import './Attribute.scss';
 import '../../../../../UIKit/Theme/Styles/_fonts_global.scss';
 import InputTags from '../../../../InputTags/InputTags';
-import {TAttributeProps} from '../../../../../Lib/Redux/Projects/slice';
-
-enum TYPE_INPUT {
-	SELECT = 'select',
-	CHECKBOX = 'checkbox',
-	RADIO = 'radio',
-	TEXT = 'text',
-	NUMBER = 'number',
-}
+import {TAttributeProps, TYPE_INPUT} from '../../../../../Lib/Redux/Projects/slice';
 
 type TAttributeComponentProps = {
 	attribute: TAttributeProps;

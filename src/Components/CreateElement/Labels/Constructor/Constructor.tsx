@@ -9,42 +9,20 @@ import './Constructor.scss';
 import '../../../../UIKit/Theme/Styles/_fonts_global.scss';
 import ColorPicker from '../../../ColorPicker/ColorPicker';
 import Attribute from './Attribute/Attribute';
-import {TAttributeProps, TLabelProps} from '../../../../Lib/Redux/Projects/slice';
+import {TAttributeProps, TLabelProps, TYPE_INPUT} from '../../../../Lib/Redux/Projects/slice';
 
 type TConstructorProps = {
 	data: TLabelProps[];
 	setData: (data: TLabelProps[]) => void;
+	labelTypes: string[];
 };
-
-const SELECT_TOOLS = [
-	'any',
-	'text',
-	'number',
-	'date',
-	'datetime',
-	'time',
-	'checkbox',
-	'radio',
-	'select',
-	'textarea',
-	'file',
-	'image',
-];
-
-enum TYPE_INPUT {
-	SELECT = 'select',
-	CHECKBOX = 'checkbox',
-	RADIO = 'radio',
-	TEXT = 'text',
-	NUMBER = 'number',
-}
 
 const Constructor = (props: TConstructorProps) => {
 	const [isColorPicker, setIsColorPicker] = useState(false);
 	const [indexEdit, setIndexEdit] = useState<number | undefined>(undefined);
 	const [editLabel, setEditLabel] = useState<TLabelProps | undefined>(undefined);
 	const [isError, setIsError] = useState(false);
-	const {data, setData} = props;
+	const {data, setData, labelTypes} = props;
 
 	const openColorPicker = () => setIsColorPicker(true);
 	const cancelColorPicker = () => setIsColorPicker(false);
@@ -204,9 +182,9 @@ const Constructor = (props: TConstructorProps) => {
 								multiple
 								limitTags={2}
 								id="multiple-limit-tags"
-								options={SELECT_TOOLS}
+								options={labelTypes}
 								getOptionLabel={(option) => option}
-								defaultValue={[SELECT_TOOLS[0]]}
+								defaultValue={[labelTypes[0]]}
 								renderInput={(params) => <TextField {...params} placeholder="Types" />}
 							/>
 						</FormControl>
